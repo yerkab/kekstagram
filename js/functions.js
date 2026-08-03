@@ -1,9 +1,9 @@
-function checkLength(string, maxLength) {
+const checkLength = (string, maxLength) => {
   return string.length <= maxLength;
-}
+};
 checkLength('Hello, world!', 20); // true
 // Проверка на палиндром
-function isPalindrome(string) {
+const isPalindrome = (string) => {
   // Нормализация строки
   const normalized = string.replaceAll(' ', '').toLowerCase();
   // Создание пустой строки для перевернутого варианта
@@ -14,10 +14,10 @@ function isPalindrome(string) {
   }
   // Сравнение строк
   return normalized === reversed;
-}
+};
 isPalindrome('А роза упала на лапу Азора'); // true
 // извлечение чисел из строки и возвращение целого числа
-function extractDigits(input) {
+const extractDigits = (input) => {
   if (input === null || input === undefined) {
     return NaN;
   }
@@ -31,7 +31,7 @@ function extractDigits(input) {
   }
   // Соединяем цифры и преобразуем в целое положительное число
   const result = Number(digits.join(''));
-  return result === 0 ? NaN : result;
-}
+  return result;
+};
 extractDigits('abc123def456'); // 123456
 
