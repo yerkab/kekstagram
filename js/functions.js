@@ -1,6 +1,4 @@
-const checkLength = (string, maxLength) => {
-  return string.length <= maxLength;
-};
+const checkLength = (string, maxLength) => string.length <= maxLength;
 checkLength('Hello, world!', 20); // true
 // Проверка на палиндром
 const isPalindrome = (string) => {
