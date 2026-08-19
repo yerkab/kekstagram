@@ -1,4 +1,4 @@
-const COMMENTATORS_NAMES = [
+const COMMENTATOR_NAMES = [
   'Иван',
   'Алихан',
   'Айсултан',
@@ -35,7 +35,7 @@ const COMMENTS_LIST = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 // массив описаний фотографий
-const DESCRIPTIONS_PHOTOS = [
+const PHOTO_DESCRIPTIONS = [
   'Пруд в парке',
   'Указатель на дороге',
   'Пляж на острове',
@@ -81,33 +81,33 @@ const createIdGenerator = () => {
 const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length - 1)];
 // генераторы уникальных идентификаторов для фотографий, комментариев и URL
 
-const generateUniqueCommentId = createIdGenerator();
-const avatarsNumber = 6; // количество аватаров
-const generateDescription = () => getRandomArrayElement(DESCRIPTIONS_PHOTOS);
-const createComment = () => {
-  const idComment = createIdGenerator();
-  return {
-    id: generateUniqueCommentId(),
-    avatar: `img/avatar-${getRandomInteger(1, avatarsNumber)}.svg`,
+const getCommentId = createIdGenerator();
+const AVATARS_COUNT = 6; // количество аватаров
+const generateDescription = () => getRandomArrayElement(PHOTO_DESCRIPTIONS);
+const getComment = () => (
+   {
+    id: getCommentId(),
+    avatar: `img/avatar-${getRandomInteger(1, AVATARS_COUNT)}.svg`,
     message: getRandomArrayElement(COMMENTS_LIST),
-    name: getRandomArrayElement(COMMENTATORS_NAMES),
-  };
-};
+    name: getRandomArrayElement(COMMENTATOR_NAMES),
+  }
+);
+
 
 const createPhoto = (id) => {
   //const idPhoto = generateUniquePhotoId();
   //const urlUniquePhoto = generateUrlPhoto();
-  const urlPhoto = `photos/${id}.jpg`;
-  const descriptionPhoto = generateDescription();
-  const likesPhoto = getRandomInteger(15, 200);
+  const url = `photos/${id}.jpg`;
+  const description = generateDescription();
+  const likes = getRandomInteger(15, 200);
   const commentsCount = getRandomInteger(0, 30);
-  const commentsPhoto = Array.from({ length: commentsCount }, () => createComment());
+  const comments = Array.from({ length: commentsCount }, () => getComment());
   return {
-    id: id,
-    url: urlPhoto,
-    description: descriptionPhoto,
-    likes: likesPhoto,
-    comments: commentsPhoto
+    id,
+    url,
+    description,
+    likes,
+    comments
   };
 };
 const createPhotos = () => {
