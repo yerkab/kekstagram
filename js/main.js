@@ -67,6 +67,7 @@ const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 const MIN_COMMENTS = 0;
 const MAX_COMMENTS = 30;
+const AVATARS_COUNT = 6; // количество аватаров
 // функция для получения случайного целого числа из диапазона включительно
 const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(min, max));
@@ -89,7 +90,6 @@ const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length 
 const getCommentId = createIdGenerator();
 const getPhotoId = createIdGenerator();
 const getUrlId = createIdGenerator();
-const AVATARS_COUNT = 6; // количество аватаров
 const generateDescription = () => getRandomArrayElement(PHOTO_DESCRIPTIONS);
 const getComment = () => (
    {
