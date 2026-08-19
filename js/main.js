@@ -92,7 +92,7 @@ const getPhotoId = createIdGenerator();
 const getUrlId = createIdGenerator();
 const generateDescription = () => getRandomArrayElement(PHOTO_DESCRIPTIONS);
 const getComment = () => (
-   {
+  {
     id: getCommentId(),
     avatar: `img/avatar-${getRandomInteger(1, AVATARS_COUNT)}.svg`,
     message: getRandomArrayElement(COMMENTS),
