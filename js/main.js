@@ -88,6 +88,7 @@ const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length 
 
 const getCommentId = createIdGenerator();
 const getPhotoId = createIdGenerator();
+const getUrlId = createIdGenerator();
 const AVATARS_COUNT = 6; // количество аватаров
 const generateDescription = () => getRandomArrayElement(PHOTO_DESCRIPTIONS);
 const getComment = () => (
@@ -102,7 +103,8 @@ const getComment = () => (
 
 const createPhoto = () => {
   const id = getPhotoId();
-  const url = `photos/${id}.jpg`;
+
+  const url = `photos/${getUrlId()}.jpg`;
   const description = generateDescription();
   const likes = getRandomInteger(MIN_LIKES, MAX_LIKES);
   const commentsCount = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS);
