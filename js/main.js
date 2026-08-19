@@ -92,11 +92,26 @@ const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length 
 const getCommentId = createIdGenerator();
 const getPhotoId = createIdGenerator();
 const generateDescription = () => getRandomArrayElement(PHOTO_DESCRIPTIONS);
+const getRandomCommentMessage = () => {
+  const firstComment = getRandomArrayElement(COMMENTS);
+
+  if (getRandomInteger(1, 2) === 1) {
+    return firstComment;
+  }
+
+  let secondComment = getRandomArrayElement(COMMENTS);
+
+  while (secondComment === firstComment) {
+    secondComment = getRandomArrayElement(COMMENTS);
+  }
+
+  return `${firstComment} ${secondComment}`;
+};
 const getComment = () => (
   {
     id: getCommentId(),
     avatar: `${AVATAR_PATH}${getRandomInteger(MIN_AVATAR_NUMBER, AVATARS_COUNT)}.svg`,
-    message: getRandomArrayElement(COMMENTS),
+    message: getRandomCommentMessage(),
     name: getRandomArrayElement(COMMENTATOR_NAMES),
   }
 );
