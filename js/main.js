@@ -26,7 +26,7 @@ const COMMENTATOR_NAMES = [
   'Арлан',
 ];
 // массив комментариев к фотографиям
-const COMMENTS_LIST = [
+const COMMENTS = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -62,6 +62,11 @@ const PHOTO_DESCRIPTIONS = [
   'Концерт на сцене',
   'Белый внедорожник проезжающий мимо бегемота'
 ];
+const PHOTOS_COUNT = 25;
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
+const MIN_COMMENTS = 0;
+const MAX_COMMENTS = 30;
 // функция для получения случайного целого числа из диапазона включительно
 const getRandomInteger = (min, max) => {
   const lower = Math.ceil(Math.min(min, max));
@@ -82,25 +87,25 @@ const getRandomArrayElement = (array) => array[getRandomInteger(0, array.length 
 // генераторы уникальных идентификаторов для фотографий, комментариев и URL
 
 const getCommentId = createIdGenerator();
+const getPhotoId = createIdGenerator();
 const AVATARS_COUNT = 6; // количество аватаров
 const generateDescription = () => getRandomArrayElement(PHOTO_DESCRIPTIONS);
 const getComment = () => (
    {
     id: getCommentId(),
     avatar: `img/avatar-${getRandomInteger(1, AVATARS_COUNT)}.svg`,
-    message: getRandomArrayElement(COMMENTS_LIST),
+    message: getRandomArrayElement(COMMENTS),
     name: getRandomArrayElement(COMMENTATOR_NAMES),
   }
 );
 
 
-const createPhoto = (id) => {
-  //const idPhoto = generateUniquePhotoId();
-  //const urlUniquePhoto = generateUrlPhoto();
+const createPhoto = () => {
+  const id = getPhotoId();
   const url = `photos/${id}.jpg`;
   const description = generateDescription();
-  const likes = getRandomInteger(15, 200);
-  const commentsCount = getRandomInteger(0, 30);
+  const likes = getRandomInteger(MIN_LIKES, MAX_LIKES);
+  const commentsCount = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS);
   const comments = Array.from({ length: commentsCount }, () => getComment());
   return {
     id,
@@ -110,12 +115,8 @@ const createPhoto = (id) => {
     comments
   };
 };
-const createPhotos = () => {
-  const photos = [];
-  for (let i = 1; i <= 25; i++) {
-    photos.push(createPhoto(i));
-  }
-  return photos;
-};
+
+const createPhotos = () =>
+  Array.from({ length: PHOTOS_COUNT }, () => createPhoto());
 
 createPhotos();
